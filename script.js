@@ -115,6 +115,7 @@ const Peer = window.Peer;
       localText.value = '';
     }
   });
+  
 
   peer.on('error', console.error);
 })();
