@@ -1,2 +1,1 @@
-# Room
-[Live example](https://example.webrtc.ecl.ntt.com/room/index.html)
+https://webrtc.ecl.ntt.com/api-reference/javascript.html
