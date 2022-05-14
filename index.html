@@ -18,9 +18,18 @@
         <div>
           <video id="js-local-stream"></video>
           <br>
+          <video id="js-display-stream"></video>
+          <br>
           <span id="js-room-mode"></span>
           <br>
           <input type="text" placeholder="Room Name" id="js-room-id" value="madara">
+          <div>
+            <form id="js-shared-media">
+            <label><input type="radio" name="media" value="camera">Camera</label>
+            <label><input type="radio" name="media" value="screen">Screen</label>
+            </form>
+          </div>
+
           <button id="js-join-trigger">Join</button>
           <button id="js-leave-trigger">Leave</button>
         </div>

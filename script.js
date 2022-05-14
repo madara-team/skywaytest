@@ -2,6 +2,7 @@ const Peer = window.Peer;
 
 (async function main() {
   const localVideo = document.getElementById('js-local-stream');
+  const localDisplay = document.getElementById('js-display-stream');
   const joinTrigger = document.getElementById('js-join-trigger');
   const leaveTrigger = document.getElementById('js-leave-trigger');
   const remoteVideos = document.getElementById('js-remote-streams');
@@ -33,11 +34,23 @@ const Peer = window.Peer;
     })
     .catch(console.error);
 
+  const localDisplayStream = await navigator.mediaDevices
+    .getDisplayMedia({
+      video: true,
+  })
+  .catch(console.error);
+
   // Render local stream
   localVideo.muted = true;
   localVideo.srcObject = localStream;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
+
+  // Render local display stream
+  localDisplay.muted = true;
+  localDisplay.srcObject = localDisplayStream;
+  localDisplay.playsInline = true;
+  await localDisplay.play().catch(console.error);
 
   // eslint-disable-next-line require-atomic-updates
   const peer = (window.peer = new Peer({
