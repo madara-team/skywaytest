@@ -13,6 +13,7 @@ const Peer = window.Peer;
   const messages = document.getElementById('js-messages');
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
+  const mediaSelectTrigger = document.getElementById('js-shared-media')
 
   meta.innerText = `
     UA: ${navigator.userAgent}
@@ -58,6 +59,8 @@ const Peer = window.Peer;
     debug: 3,
   }));
 
+
+
   // Register join handler
   joinTrigger.addEventListener('click', () => {
     // Note that you need to ensure the peer has connected to signaling server
@@ -65,7 +68,7 @@ const Peer = window.Peer;
     if (!peer.open) {
       return;
     }
-
+ 
     const room = peer.joinRoom(roomId.value, {
       mode: getRoomModeByHash(),
       stream: localStream,
@@ -119,6 +122,17 @@ const Peer = window.Peer;
 
     sendTrigger.addEventListener('click', onClickSend);
     leaveTrigger.addEventListener('click', () => room.close(), { once: true });
+
+
+    //switch media
+    mediaSelectTrigger.addEventListener('change', function () {
+      if(mediaSelectTrigger.media.value=="camera"){
+        room.replaceStream(localStream);
+      }
+      else{
+        room.replaceStream(localDisplayStream);
+      }
+    });
 
     function onClickSend() {
       // Send message to all of the peers in the room via websocket
